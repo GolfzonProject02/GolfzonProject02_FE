@@ -7,7 +7,7 @@ function menutabOpen() {
         const menutab = document.getElementById('menutab');
         menutab.setAttribute('style','display:none');
         if(login != null) {
-            pageMove('login/login.html');
+            pageMove('@login/login.html');
         }
     }
 
@@ -15,7 +15,7 @@ function menutabOpen() {
     const login = 0;
     const login_tag = document.getElementById('login');
     if(login == 0) {
-        login_tag.innerHTML = `<a href="login.html">
+        login_tag.innerHTML = `<a href="login.do">
         <p>로그인 / 회원가입</p>
         </a>`;
     }else if(login == 1) {
