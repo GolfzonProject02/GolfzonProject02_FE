@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../../resources/css/header/header.css">
+    <link rel="stylesheet" href="../../resources/css/footer/footer.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<div id="header">
+        <div id="headerarea">
+            <a href="../main.html">
+                <img id="logo" src="../../resources/css/image/logo.png">
+            </a>
+            <form id="searchspace" action="검색.....">
+                <input id="searchText" type="text" name="searchWord">
+                <input id="searchIcon"  type="image" src="../../resources/css/image/icon/search-removebg.png">
+            </form>
+            <img id="menutab_buttom" src="../../resources/css/image/icon/catalog.png" onclick="menutabOpen()">
+            <div id="menutab">
+                <img id="menutab_close" src="../../resources/css/image/icon/close.png" onclick="menutabClose()">
+                <div id="login">
+                </div>
+                <div id="mypage_package">
+                    <div>
+                        <a href="예약리스트 페이지">
+                        <img src="../../resources/css/image/icon/reservation.png"><br>
+                        <p>예약리스트</p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="이용후기 Q&A관리 페이지">
+                        <img src="../../resources/css/image/icon/qna.png"><br>
+                        <p>이용후기<br>Q&A 관리</p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="결제내역 마일리지 페이지">
+                        <img src="../../resources/css/image/icon/payment.png"><br>
+                        <p>결제내역<br>마일리지</p>
+                        </a>
+                    </div>
+                </div>
+                <div id="menutab_bottom">
+                    <div class="menutab_bottom_item">
+                        <a href="1:1문의 페이지">
+                            1:1문의
+                        </a>
+                    </div>
+                    <div class="menutab_bottom_item">
+                        <a href="공지사항 페이지">
+                            공지사항
+                        </a>
+                    </div>
+                    <div class="menutab_bottom_item">
+                        <a href="이용가이드">
+                            이용가이드
+                        </a>
+                    </div>
+                    <div class="menutab_bottom_item">
+                        <a href="워크토크 소개">
+                            워크토크 소개
+                        </a>
+                    </div>
+                    <div class="menutab_bottom_item">
+                        <a>공급자페이지로 이동</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100%;height:350px;"></div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fd06a3065b01f5befa56232b116ea8d"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+</script>
+</body>
+</html>
