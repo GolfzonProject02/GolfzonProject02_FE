@@ -79,28 +79,57 @@
                 <p>1:1문의 관리</p>
             </div>
             <div id="pageTop">
-                <select name="답글상태" id="sort_box">
-                    <option value="1">답글상태</option>
-                    <option value="4">답글등록</option>
-                    <option value="4">답글미등록</option>
+                <select name="예약상태" class="sort_box" id="reservation">
+                    <option value="0" hidden>예약상태</option>
+                    <option value="1">전체</option>
+                    <option value="2">예약</option>
+                    <option value="3">계정</option>
+                    <option value="4">결제</option>
                 </select>
-                <button id="QNA_insert_btn">1:1문의작성</button>
+                <select name="답글상태" class="sort_box" id="andser">
+                    <option value="0" hidden>답글상태</option>
+                    <option value="1">전체</option>
+                    <option value="2">답글등록</option>
+                    <option value="3">답글미등록</option>
+                </select>
+                <button id="cc_insert_btn">1:1문의작성</button>
             </div>
-            <div id="QNA_selectAll">
+            <div id="cc_selectAll">
                 <!-- c문 출력 -->
-                <div class="QNA_box">
-                    <div class="user_QNA">
-                        <p class="user_QNA_type">[ 문의종류 ]</p>
-                        <p class="user_QNA_Date">00.00.00</p>
+                <div class="cc_box">
+                    <div class="user_cc">
+                        <p class="user_cc_title">[ 문의제목 ]</p>
+                        <p class="user_cc_type">예약</p>
+                        <p class="user_cc_Date">00.00.00</p>
                         <button class="updateBtn" id="글번호">수정</button>
                         <button class="deleteBtn" id="글번호">삭제</button>
-                        <textarea name="QNAText" class="QNAText" readonly>내용</textarea>
+                        <textarea name="ccText" class="ccText" readonly>내용</textarea>
                     </div>
                     <!-- c-if문 출력 -->
                     <div class="master_Anser">
                         <p class="master_Anser_title">[ 호스트의 답글 ]</p>
                         <p class="master_Anser_date">00.00.00</p>
-                        <textarea name="QNAText" class="AnserText" readonly>내용</textarea>
+                        <textarea name="ccText" class="AnserText" readonly>내용</textarea>
+                    </div>
+                </div>
+                <div class="cc_box">
+                    <div class="user_cc">
+                        <p class="user_cc_title">[ 문의제목 ]</p>
+                        <p class="user_cc_type">계정</p>
+                        <p class="user_cc_Date">00.00.00</p>
+                        <button class="updateBtn" id="글번호">수정</button>
+                        <button class="deleteBtn" id="글번호">삭제</button>
+                        <textarea name="ccText" class="ccText" readonly>내용</textarea>
+                    </div>
+                </div>
+                <div class="cc_box">
+                    <div class="user_cc">
+                        <p class="user_cc_title">[ 문의제목 ]</p>
+                        <p class="user_cc_type">결제</p>
+                        <p class="user_cc_Date">00.00.00</p>
+                        <button class="updateBtn" id="글번호">수정</button>
+                        <button class="deleteBtn" id="글번호">삭제</button>
+                        <textarea name="ccText" class="ccText" readonly>내용</textarea>
                     </div>
                 </div>
             </div>

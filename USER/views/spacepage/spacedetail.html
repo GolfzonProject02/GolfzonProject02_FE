@@ -127,19 +127,24 @@
                         </div>
                         <div id="spaceQNA">
                             <p>Q&A</p>
+                            <button id="qna_insert_btn">QNA문의작성</button>
                             <div id="QNA">
                                 <!-- 출력문... -->
                                 <div class="QNA_box">
                                     <div class="QNA">
-                                        <p>[문의종류]</p>
+                                        <p class="user_qna_title">[ 문의제목 ]</p>
+                                        <p class="user_qna_type">예약</p>
                                         <p>작성자</p>
                                         <p class="writeDate">작성일</p>
+                                        <!-- 버튼 if 문 -->
                                         <div>
                                             <button class="updateBtn" id="admin_update">수정</button>
                                             <button class="deleteBtn" id="admin_delelte">삭제</button>
                                         </div>
                                         <textarea name="QNAText" class="QNAText" readonly>내용</textarea>
+                                        <p class="qna_num" val="qna_num"><p>
                                     </div>
+                                    <!-- 답글 if 문 -->
                                     <div class="QNAAnser">
                                         <p class="reviewAnser_title">호스트의 답글</p>
                                         <p class="writeDate">작성일</p>
@@ -175,35 +180,11 @@
                                             <img src="../../resources/css/image/space/dummy3.jpg">
                                         </div>
                                     </div>
-                                    <div class="reviewAnser">
-                                    </div>
-                                </div>
-                                <div class="review_box">
-                                    <div class="review">
-                                        <p>작성자</p>
-                                        <p class="writeDate">작성일</p>
-                                        <div class="reviewGrade">
-                                            <img src="../../resources/css/image/icon/reveiwGrade.png"/>
-                                        </div>
-                                        <div class="reviewGradeColor" value="1">
-                                            <img src="../../resources/css/image/icon/reveiwGradeColor.png" />
-                                        </div>
-                                        <!-- admin은 리뷰아이디로 계정으로 접근시만 보이도록... -->
-                                        <div>
-                                            <button class="updateBtn" id="admin_update">수정</button>
-                                            <button class="deleteBtn" id="admin_delelte">삭제</button>
-                                        </div>
-                                        <textarea name="reviewText" class="reviewText" readonly>내용</textarea>
-                                        <div class="reviewImg">
-                                            <img src="../../resources/css/image/space/dummy1.jpg">
-                                            <img src="../../resources/css/image/space/dummy2.jpg">
-                                            <img src="../../resources/css/image/space/dummy3.jpg">
-                                        </div>
-                                    </div>
+                                    <!-- 답글 if 문 -->
                                     <div class="reviewAnser">
                                         <p class="reviewAnser_title">호스트의 답글</p>
                                         <p class="writeDate">작성일</p>
-                                        <textarea name="reviewText" class="reviewText" readonly>내용</textarea>
+                                        <textarea name="QNAText" class="QNAText" readonly>내용</textarea>
                                     </div>
                                 </div>
                             </div>

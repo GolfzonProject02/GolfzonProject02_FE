@@ -231,7 +231,6 @@ $('#member_email_all').on('submit','#member_email_update_form',function(){
 })
 
 // 연락처
-// 이메일 변경
 $('#member_tel_btn').click(function(){
     $('#member_tel').css('display','none');
     $('#member_tel_btn').css('pointer-events','none');
@@ -295,4 +294,102 @@ $('#member_tel_all').on('submit','#member_tel_update_form',function(){
     $('#member_tel').css('display','block');
     $(this).parent().detach();
     $('#member_tel_btn').css('pointer-events','all');
+})
+
+// 비밀번호 변경
+$('#member_pw_btn').click(function(){
+    $('#member_pw_btn').css('pointer-events','none');
+    $(this).after(`
+        <div id="member_pw_update" class="update_contain">
+            <form class="update_box" id="member_pw_update_form" onsubmit="return false">
+                <div>
+                    <input class="inputBox password" id="password" name="user.pw" type="password" placeholder="비밀번호" check_result="fail">
+                    <span id="password-warn"></span>
+                    <img src="../../resources/css/image/icon/close.png" class="update_close"><br>
+                </div>
+                <div>
+                    <input class="inputBox password" id="passwordCheck" type="password" placeholder="비밀번호 확인">
+                    <span id="passwordCheck-warn"></span>
+                </div>
+            </form>
+        </div>
+    `)
+})
+
+$('#member_pw_all').on('click','.update_close',function(){
+    $('#member_pw_update').detach();
+    $('#member_pw_btn').css('pointer-events','all');
+})
+$('#member_pw_all').on('blur','#password',function() {
+    const pw = $('#password').val();
+    const pwcheck = $('#passwordCheck').val();
+    if(pw != '') {
+        if(pw == pwcheck) {
+            $('#passwordCheck-warn').html('일치');
+            $('#passwordCheck-warn').css({'color':'green', 'font-weight':'blod'});
+            $('#password').attr('check_result','success');
+            $('#passwordCheck-warn').after(`
+                <input type="submit" class="member_pw_check" value="수정">
+            `)
+        } else if(pw != pwcheck) {
+            if(pwcheck != '') {
+                $('#passwordCheck-warn').html('불일치');
+                $('#passwordCheck-warn').css({'color':'red', 'font-weight':'blod'});
+                $('#password').attr('check_result','fail');
+            }
+        }
+    }
+});
+$('#member_pw_all').on('blur','#passwordCheck',function() {
+    const pw = $('#password').val();
+    const pwcheck = $('#passwordCheck').val();
+    if(!pw) {
+        $('#password').attr('placeholder','비밀번호를 입력해주세요.');
+        $('#password-warn').html('미입력');
+        $('#password-warn').css('color','red');
+    }
+    if(pw != '') {
+        if(pw == pwcheck) {
+            $('#passwordCheck-warn').html('일치');
+            $('#passwordCheck-warn').css({'color':'green', 'font-weight':'blod'});
+            $('#password').attr('check_result','success');
+            $('#passwordCheck-warn').after(`
+                <input type="submit" class="member_pw_check" value="수정">
+            `)
+        } else if(pw != pwcheck) {
+            $('#passwordCheck-warn').html('불일치');
+            $('#passwordCheck-warn').css({'color':'red', 'font-weight':'blod'});
+            $('#password').attr('check_result','fail');
+        }
+    }
+});
+$('#member_pw_all').on('focus','#password',function(){
+    $('.member_pw_check').detach();
+    $('#password-warn').html('');
+    $('#passwordCheck-warn').html('');
+    $('#password').attr('placeholder','비밀번호');
+})
+$('#member_pw_all').on('focus','#passwordCheck',function(){
+    $('.member_pw_check').detach();
+    $('#password-warn').html('');
+    $('#passwordCheck-warn').html('');
+})
+$('#member_pw_all').on('submit','#member_pw_update_form',function(){
+    console.log("여기");
+    let password = $('#password').val();
+    // $.ajax({
+    //     type : "post",
+    //     url : "updateOK",
+    //     dataType : "json",
+    //     data : {
+    //         member_name : memeber_name,
+    //         member_email : member_email
+    //     },
+    //     success : function(data){
+    //     }
+    // })
+    // 성공시
+    console.log(member_tel);
+    $(this).parent().detach();
+    $('#member_pw_btn').css('pointer-events','all');
 })

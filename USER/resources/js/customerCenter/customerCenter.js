@@ -51,84 +51,97 @@ function menutabOpen() {
 }
 
 // insert_box
-$('#QNA_insert_btn').click(function(){
+$('#cc_insert_btn').click(function(){
     $('#update_box').detach();
     $(this).after(`
-    <div id="QNA_insert">
+        <div id="cc_insert">
             <p>문의작성</p>
-            <form action="insertOK" onsubmit="return false">
-            <select name="type" id="QNA_type">
+            <form action="customercenter_insert.do" method="post" enctype="multipart/form-data">
+               <input type="text" name="title" id="cc_title" placeholder="문의 제목을 작성해 주세요.">
+               <select name="type" id="cc_type">
                     <option value="예약">예약</option>
                     <option value="계정">계정</option>
                     <option value="결제">결제</option>
                 </select>
-                <textarea name="content" id="QNA_content" placeholder="문의내용을 작성해 주세요."></textarea>
+                <textarea name="content" id="cc_content" placeholder="문의내용을 작성해 주세요."></textarea>
                 <button id="close">닫기</button>
+                <input type="file" name="multipartFile" id="imgname">
                 <input type="submit" id="insert_submit" value="제출">
+                <input type="text' id="writer" name="writer" value="kim" hidden>
             </form>
         </div>
     `)
 })
 
-// insert_box
-$('#pageTop').on('submit','#QNA_insert',function(){
-    // let member_name =  "<%=(String)session.getAttribute("member_name")%>";
-    let QNA_type = $('#QNA_type').val();
-    let QNA_content = $('#QNA_content').val();
-    let w_date = today_time;
-    console.log(
-        "QNA_type : "+ QNA_type,
-        "QNA_content : "+ QNA_content,
-        "w_date : "+ w_date
-    )
-    $.ajax({
-        // type : "post",
-        // url : 경로,
-        data : {
-            QNA_type : QNA_type,
-            QNA_content : QNA_content,
-            w_date : w_date
-        },
-        success : function(data){
-
-        }
-
-    })
-})
-
 $('#pageTop').on('click','#close',function(){
     console.log("클릭");
-    $('#QNA_insert').detach();
+    $('#cc_insert').detach();
+    $('#update_box').detach();
+})
+$('#cc_selectAll').on('click','#update_close',function(){
+    console.log("클릭");
+    $('#cc_insert').detach();
+    $('#update_box').detach();
 })
 
 // update
 $('.updateBtn').click(function(){
-    $('#QNA_insert').detach();
+    $('#cc_insert').detach();
+    $('#update_box').detach();
+    let title = $(this).parent().children('.user_cc_title').text();
+    let text = $(this).parent().children('.ccText').text();
+    let cc_num = $(this).parent().children('.cc_num').val();
+    console.log(title,text,cc_num);
     $(this).after(`
-    <div id="update_box">
-        <form action="">
-            <textarea name="QNAText_update" id="QNAText_update"></textarea>
-            <button id="close">닫기</button>
-            <input type="submit" id="update_submit" value="글수정">
-        </form>
-    </div>
+        <div id="update_box">
+            <p>문의수정</p>
+            <form action="customercenter_update.do" method="post" enctype="multipart/form-data">
+                <input type="text" name="title" id="cc_update_title" value="${title}">
+                <select name="type" id="cc_update_type">
+                    <option value="예약">예약</option>
+                    <option value="계정">계정</option>
+                    <option value="결제">결제</option>
+                </select>
+                <textarea name="content" id="cc_update_content">${text}</textarea>
+                <button id="update_close">닫기</button>
+                <input type="file" name="multipartFile" id="imgname">
+                <input type="submit" id="cc_update_submit" value="수정">
+                <input type="text" name="cc_num" id="cc_num" value="${cc_num}" hidden>
+                <input type="text' id="writer" name="writer" value="kim" hidden>
+            </form>
+        </div>
     `)
 })
 
 // delete
 $('.deleteBtn').click(function(){
-    console.log($(this).attr('id'));
-    let QNA_num = $(this).attr('id')
+    let cc_num = $(this).parent().children('.cc_num').val();
     if(confirm('정말 삭제하시겠습니까?')) {
         $.ajax({
             type : "get",
-            // url : '경로'
-            data : {
-                QNA_num : QNA_num
-            },
+            url : "customercenter_delete.do?cc_num=" + cc_num,
             success : function(data){
                 alert("삭제완료");
             }
         })
     }
+})
+
+// sort
+$('.sort_box').change(function(){
+    let val = $(this).val();
+    console.log(val);
+    let url = "";
+    if (val == "reservation") {
+        url = "customercenter.do?reservation=" + val;
+    } else {
+        url = "customercenter.do?andser=" + val;
+    }
+    $.ajax({
+        type : "get",
+        url : url,
+        success : function(data){
+            $(location).attr('href',url);
+        }
+    })
 })

@@ -447,6 +447,114 @@ $('#rBox').on('submit','#reservationOK', function(){
     });
 })
 
+$('#spaceQNA').on('click','#insert_close',function(){
+    console.log("클릭");
+    $('#qna_insert').detach();
+    $('#update_box').detach();
+})
+$('#spaceQNA').on('click','#update_close',function(){
+    console.log("클릭");
+    $('#qna_insert').detach();
+    $('#update_box').detach();
+})
+
+// QNA
+// insert_box
+$('#qna_insert_btn').click(function(){
+    $('#qna_insert').detach();
+    $('#update_box').detach();
+    $(this).after(`
+        <div id="qna_insert">
+            <p>문의작성</p>
+            <form action="customercenter_insert.do" method="post" enctype="multipart/form-data">
+               <input type="text" name="title" id="qna_title" placeholder="문의 제목을 작성해 주세요.">
+               <select name="QNA" class="sort_box" id="reservation">
+                    <option value="0" hidden>문의종류</option>
+                    <option value="2">예약</option>
+                    <option value="3">계정</option>
+                    <option value="4">결제</option>
+                </select>
+                <textarea name="content" id="qna_content" placeholder="문의내용을 작성해 주세요."></textarea>
+                <input type="file" name="multipartFile" id="imgname">
+                <input type="submit" id="insert_submit" value="제출">
+                <input type="text' id="writer" name="writer" value="kim" hidden>
+                </form>
+            <button id="insert_close">닫기</button>
+        </div>
+    `)
+})
+
+// update
+$('.updateBtn').click(function(){
+    $('#qna_insert').detach();
+    $('#update_box').detach();
+    let title = $(this).parent().children('.user_qna_title').text();
+    let text = $(this).parent().children('.qnaText').text();
+    let qna_num = $(this).parent().children('.qna_num').val();
+    console.log(title,text,qna_num);
+    $(this).after(`
+        <div id="update_box">
+            <p>문의수정</p>
+            <form action="customercenter_update.do" method="post" enctype="multipart/form-data">
+                <input type="text" name="title" id="qna_update_title" value="${title}">
+                <select name="type" id="qna_update_type">
+                    <option value="예약">예약</option>
+                    <option value="계정">계정</option>
+                    <option value="결제">결제</option>
+                </select>
+                <textarea name="content" id="qna_update_content">${text}</textarea>
+                <input type="file" name="multipartFile" id="imgname">
+                <input type="submit" id="qna_update_submit" value="수정">
+                <input type="text" name="qna_num" id="qna_num" value="${qna_num}" hidden>
+                <input type="text' id="writer" name="writer" value="kim" hidden>
+            </form>
+            <button id="update_close">닫기</button>
+        </div>
+    `)
+})
+
+// delete
+$('.deleteBtn').click(function(){
+    let qna_num = $(this).parent().children('.qna_num').val();
+    if(confirm('정말 삭제하시겠습니까?')) {
+        $.ajax({
+            type : "get",
+            url : "customercenter_delete.do?qna_num=" + qna_num,
+            success : function(data){
+                alert("삭제완료");
+            }
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -457,43 +565,3 @@ mapOption = {
 };
 // 지도 생성
 var map = new kakao.maps.Map(mapContainer, mapOption);
-// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-var mapTypeControl = new kakao.maps.MapTypeControl();
-// 지도 타입 컨트롤을 지도에 표시합니다
-map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-function getInfo() {
-    // 지도의 현재 중심좌표를 얻어옵니다 
-    var center = map.getCenter(); 
-    
-    // 지도의 현재 레벨을 얻어옵니다
-    var level = map.getLevel();
-    
-    // 지도타입을 얻어옵니다
-    var mapTypeId = map.getMapTypeId(); 
-    
-    // 지도의 현재 영역을 얻어옵니다 
-    var bounds = map.getBounds();
-    
-    // 영역의 남서쪽 좌표를 얻어옵니다 
-    var swLatLng = bounds.getSouthWest(); 
-    
-    // 영역의 북동쪽 좌표를 얻어옵니다 
-    var neLatLng = bounds.getNorthEast(); 
-    
-    // 영역정보를 문자열로 얻어옵니다. ((남,서), (북,동)) 형식입니다
-    var boundsStr = bounds.toString();
-    
-    
-    var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
-    message += '경도 ' + center.getLng() + ' 이고 <br>';
-    message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
-    message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
-    message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
-    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
-    
-    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-    // ex) console.log(message);
-}
-// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-var zoomControl = new kakao.maps.ZoomControl();
-map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);

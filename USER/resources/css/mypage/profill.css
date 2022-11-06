@@ -117,3 +117,34 @@ a {
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* 비밀번호 */
+#member_pw_update {
+    margin-left: 70px;
+}
+#member_pw_update_form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 30px;
+}
+#member_pw_update_form div {
+
+}
+#password, #passwordCheck {
+    width: 200px;
+    height: 20px;
+}
+.member_pw_check {
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background-color: white;
+    cursor: pointer;
+}
+.member_pw_check:hover{
+    background-color: rgb(209, 209, 241);
+    color: white;
+}
